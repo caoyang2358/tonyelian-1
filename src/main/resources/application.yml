@@ -1,0 +1,25 @@
+spring:
+  application.name: copper-twin-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/copper_twin}
+    username: ${DB_USERNAME:copper_twin}
+    password: ${DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+  flyway.enabled: true
+  jackson:
+    time-zone: Asia/Shanghai
+    default-property-inclusion: non_null
+server:
+  port: ${SERVER_PORT:8080}
+management:
+  endpoints.web.exposure.include: health,info,metrics
+  endpoint.health.probes.enabled: true
+springdoc.swagger-ui.path: /swagger-ui.html
+app.cors.allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4173,http://localhost:3000}
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+  pattern.console: '{"time":"%d{yyyy-MM-dd''T''HH:mm:ss.SSSXXX}","level":"%p","traceId":"%X{traceId:-}","logger":"%logger{36}","message":"%replace(%m){''[\r\n]+'','' ''}"}%n'
+
